@@ -102,7 +102,7 @@ int main()
 
     // Set up our joystick identification sf::Text objects
     {
-        auto [it, success]   = texts.emplace("ID", JoystickObject{{font, "<Not Connected>"}, {font}});
+        auto [it, success]   = texts.emplace("ID", JoystickObject{sf::Text(font, "<Not Connected>"), sf::Text(font)});
         auto& [label, value] = it->second;
         label.setPosition({5.f, 5.f});
         value.setPosition({80.f, 5.f});
@@ -112,7 +112,8 @@ int main()
     sstr.str("");
     sstr << threshold << "  (Change with up/down arrow keys)";
     {
-        auto [it, success]   = texts.emplace("Threshold", JoystickObject{{font, "Threshold:"}, {font, sstr.str()}});
+        auto [it, success]   = texts.emplace("Threshold",
+                                           JoystickObject{sf::Text(font, "Threshold:"), sf::Text(font, sstr.str())});
         auto& [label, value] = it->second;
         label.setPosition({5.f, 5.f + 2 * font.getLineSpacing(14)});
         value.setPosition({80.f, 5.f + 2 * font.getLineSpacing(14)});
@@ -121,7 +122,8 @@ int main()
     // Set up our label-value sf::Text objects
     for (unsigned int i = 0; i < sf::Joystick::AxisCount; ++i)
     {
-        auto [it, success]   = texts.emplace(axislabels[i], JoystickObject{{font, axislabels[i] + ":"}, {font, "N/A"}});
+        auto [it, success]   = texts.emplace(axislabels[i],
+                                           JoystickObject{sf::Text(font, axislabels[i] + ":"), sf::Text(font, "N/A")});
         auto& [label, value] = it->second;
         label.setPosition({5.f, 5.f + (static_cast<float>(i + 4) * font.getLineSpacing(14))});
         value.setPosition({80.f, 5.f + (static_cast<float>(i + 4) * font.getLineSpacing(14))});
@@ -131,7 +133,8 @@ int main()
     {
         sstr.str("");
         sstr << "Button " << i;
-        auto [it, success]   = texts.emplace(sstr.str(), JoystickObject{{font, sstr.str() + ":"}, {font, "N/A"}});
+        auto [it, success]   = texts.emplace(sstr.str(),
+                                           JoystickObject{sf::Text(font, sstr.str() + ":"), sf::Text(font, "N/A")});
         auto& [label, value] = it->second;
         label.setPosition({5.f, 5.f + (static_cast<float>(sf::Joystick::AxisCount + i + 4) * font.getLineSpacing(14))});
         value.setPosition({80.f, 5.f + (static_cast<float>(sf::Joystick::AxisCount + i + 4) * font.getLineSpacing(14))});

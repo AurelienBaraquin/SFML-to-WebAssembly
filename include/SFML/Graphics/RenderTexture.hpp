@@ -80,7 +80,7 @@ public:
     /// \throws `sf::Exception` if creation was unsuccessful
     ///
     ////////////////////////////////////////////////////////////
-    RenderTexture(Vector2u size, const ContextSettings& settings = {});
+    explicit RenderTexture(Vector2u size, const ContextSettings& settings = {});
 
     ////////////////////////////////////////////////////////////
     /// \brief Destructor
