@@ -96,6 +96,13 @@
         // NetBSD
         #define SFML_SYSTEM_NETBSD
 
+    #elif defined(__EMSCRIPTEN__)
+
+        #include <GLES2/gl2.h>
+        #include <GLES2/gl2ext.h>
+
+        #define SFML_SYSTEM_EMC
+
     #else
 
         // Unsupported UNIX system

@@ -62,6 +62,10 @@ namespace sf
     // Window handle is ANativeWindow* (void*) on Android
     typedef void* WindowHandle;
 
+#elif defined(SFML_SYSTEM_EMC)
+
+    typedef void* WindowHandle;
+
 #elif defined(SFML_DOXYGEN)
 
     // Define typedef symbol so that Doxygen can attach some documentation to it

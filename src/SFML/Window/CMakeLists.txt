@@ -278,6 +278,15 @@ elseif(SFML_OS_ANDROID)
         ${SRCROOT}/Android/SensorImpl.cpp
     )
     source_group("android" FILES ${PLATFORM_SRC})
+elseif(SFML_OS_EMSCRIPTEN)
+    # Emscripten-specific source files (OpenGL ES 2 support)
+    set(PLATFORM_SRC
+        ${SRCROOT}/EGLCheck.cpp
+        ${SRCROOT}/EGLCheck.hpp
+        ${SRCROOT}/EglContext.cpp
+        ${SRCROOT}/EglContext.hpp
+    )
+    source_group("emscripten" FILES ${PLATFORM_SRC})
 endif()
 
 # define the sfml-window target
@@ -294,6 +303,16 @@ if(SFML_OS_LINUX OR SFML_OS_FREEBSD OR SFML_OS_OPENBSD OR SFML_OS_NETBSD)
         sfml_find_package(X11 INCLUDE "X11_INCLUDE_DIR" LINK "X11_X11_LIB" "X11_Xrandr_LIB" "X11_Xcursor_LIB")
         target_link_libraries(sfml-window PRIVATE X11)
     endif()
+
+# Emscripten uses OpenGL ES, so we link against it
+if(EMSCRIPTEN)
+    target_link_libraries(sfml-window PRIVATE "-s USE_WEBGL2=1")
+else()
+    sfml_find_package(GLES INCLUDE "GLES_INCLUDE_DIR" LINK "GLES_LIBRARY")
+    sfml_find_package(EGL INCLUDE "EGL_INCLUDE_DIR" LINK "EGL_LIBRARY")
+    target_link_libraries(sfml-window PRIVATE GLES EGL)
+endif()
+
 endif()
 target_link_libraries(sfml-window PUBLIC sfml-system)
 
@@ -316,7 +335,9 @@ if ((NOT ${CMAKE_VERSION} VERSION_LESS 3.11) AND (NOT OpenGL_GL_PREFERENCE))
 endif()
 
 if(SFML_OS_IOS)
-    target_link_libraries(sfml-window PRIVATE "-framework OpenGLES")
+    sfml_add_external(GLES LINK "-framework OpenGLES")
+
+    target_link_libraries(sfml-window PRIVATE GLES)
 elseif(SFML_OS_ANDROID)
     sfml_find_package(GLES INCLUDE "GLES_INCLUDE_DIR" LINK "GLES_LIBRARY")
     sfml_find_package(EGL INCLUDE "EGL_INCLUDE_DIR" LINK "EGL_LIBRARY")
@@ -345,7 +366,9 @@ elseif(SFML_OS_FREEBSD)
 elseif(SFML_OS_MACOSX)
     target_link_libraries(sfml-window PRIVATE "-framework Foundation" "-framework AppKit" "-framework IOKit" "-framework Carbon")
 elseif(SFML_OS_IOS)
-    target_link_libraries(sfml-window PUBLIC "-framework Foundation" "-framework UIKit" "-framework CoreGraphics" "-framework QuartzCore" "-framework CoreMotion")
+    target_link_libraries(sfml-window PRIVATE "-framework Foundation" "-framework UIKit" "-framework CoreGraphics" "-framework QuartzCore" "-framework CoreMotion")
 elseif(SFML_OS_ANDROID)
     target_link_libraries(sfml-window PRIVATE android)
+elseif(EMSCRIPTEN)
+    target_link_libraries(sfml-window PRIVATE "-s USE_WEBGL2=1")
 endif()
