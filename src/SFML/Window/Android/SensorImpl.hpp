@@ -29,8 +29,10 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <SFML/System/Vector3.hpp>
-#include <android/sensor.h>
 
+#if defined(SFML_SYSTEM_ANDROID)
+    #include <android/sensor.h>
+#endif
 
 namespace sf
 {
@@ -56,6 +58,7 @@ public:
     ////////////////////////////////////////////////////////////
     static void cleanup();
 
+#if defined(SFML_SYSTEM_ANDROID)
     ////////////////////////////////////////////////////////////
     /// \brief Check if a sensor is available
     ///
@@ -65,7 +68,11 @@ public:
     ///
     ////////////////////////////////////////////////////////////
     static bool isAvailable(Sensor::Type sensor);
+#else
+    static bool isAvailable() { return false; }
+#endif
 
+#if defined(SFML_SYSTEM_ANDROID)
     ////////////////////////////////////////////////////////////
     /// \brief Open the sensor
     ///
@@ -75,6 +82,9 @@ public:
     ///
     ////////////////////////////////////////////////////////////
     bool open(Sensor::Type sensor);
+#else
+    bool open() { return false; }
+#endif
 
     ////////////////////////////////////////////////////////////
     /// \brief Close the sensor
@@ -100,6 +110,7 @@ public:
 
 private:
 
+#if defined(SFML_SYSTEM_ANDROID)
     ////////////////////////////////////////////////////////////
     /// \brief Get the default Android sensor matching the sensor type
     ///
@@ -109,6 +120,9 @@ private:
     ///
     ////////////////////////////////////////////////////////////
     static ASensor const* getDefaultSensor(Sensor::Type sensor);
+#else
+    static void const* getDefaultSensor() { return nullptr; }
+#endif
 
     ////////////////////////////////////////////////////////////
     /// \brief Process the pending sensor data available and add them to our lists
@@ -125,7 +139,9 @@ private:
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
+#if defined(SFML_SYSTEM_ANDROID)
     const ASensor* m_sensor; ///< Android sensor structure
+#endif
     unsigned int   m_index;  ///< Index of the sensor
 };
 

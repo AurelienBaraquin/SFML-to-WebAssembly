@@ -42,7 +42,7 @@
     #include <SFML/Window/OSX/ClipboardImpl.hpp>
 #elif defined(SFML_SYSTEM_IOS)
     #include <SFML/Window/iOS/ClipboardImpl.hpp>
-#elif defined(SFML_SYSTEM_ANDROID)
+#elif defined(SFML_SYSTEM_ANDROID) || defined(SFML_SYSTEM_EMSCRIPTEN)
     #include <SFML/Window/Android/ClipboardImpl.hpp>
 #endif
 

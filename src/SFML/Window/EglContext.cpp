@@ -54,7 +54,7 @@ namespace
     {
         EGLDisplay getInitializedDisplay()
         {
-#if defined(SFML_SYSTEM_ANDROID)
+#if defined(SFML_SYSTEM_ANDROID) || defined(SFML_SYSTEM_EMSCRIPTEN)
 
             // On Android, its native activity handles this for us
             sf::priv::ActivityStates& states = sf::priv::getActivity();
@@ -160,7 +160,7 @@ m_config  (NULL)
     // Create EGL context
     createContext(shared);
 
-#if !defined(SFML_SYSTEM_ANDROID)
+#if !defined(SFML_SYSTEM_ANDROID) || defined(SFML_SYSTEM_EMSCRIPTEN)
     // Create EGL surface (except on Android because the window is created
     // asynchronously, its activity manager will call it for us)
     createSurface(owner->getSystemHandle());

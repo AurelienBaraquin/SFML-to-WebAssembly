@@ -105,7 +105,7 @@ void Window::create(VideoMode mode, const String& title, Uint32 style, const Con
     }
 
     // Check validity of style according to the underlying platform
-    #if defined(SFML_SYSTEM_IOS) || defined(SFML_SYSTEM_ANDROID)
+    #if defined(SFML_SYSTEM_IOS) || defined(SFML_SYSTEM_ANDROID) || defined(SFML_SYSTEM_EMSCRIPTEN)
         if (style & Style::Fullscreen)
             style &= ~static_cast<Uint32>(Style::Titlebar);
         else

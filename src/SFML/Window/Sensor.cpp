@@ -28,6 +28,7 @@
 #include <SFML/Window/Sensor.hpp>
 #include <SFML/Window/SensorManager.hpp>
 
+#ifdef SFML_SYSTEM_ANDROID
 
 namespace sf
 {
@@ -51,3 +52,5 @@ Vector3f Sensor::getValue(Type sensor)
 }
 
 } // namespace sf
+
+#endif

@@ -27,7 +27,9 @@
 ////////////////////////////////////////////////////////////
 #include <SFML/Window/SensorImpl.hpp>
 #include <SFML/System/Time.hpp>
-#include <android/looper.h>
+#ifdef defined(SFML_SYSTEM_ANDROID)
+    #include <android/looper.h>
+#endif
 
 #if defined(__clang__)
     #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -40,6 +42,7 @@
 #define ASENSOR_TYPE_LINEAR_ACCELERATION 0x0000000a
 #define ASENSOR_TYPE_ORIENTATION         0x00000003
 
+#ifdef defined(SFML_SYSTEM_ANDROID)
 namespace
 {
     ALooper* looper;
@@ -47,6 +50,7 @@ namespace
     ASensorEventQueue* sensorEventQueue;
     sf::Vector3f       sensorData[sf::Sensor::Count];
 }
+#endif
 
 
 namespace sf
@@ -54,6 +58,7 @@ namespace sf
 namespace priv
 {
 ////////////////////////////////////////////////////////////
+#ifdef defined(SFML_SYSTEM_ANDROID)
 void SensorImpl::initialize()
 {
     // Get the looper associated with this thread
@@ -219,6 +224,14 @@ int SensorImpl::processSensorEvents(int /* fd */, int /* events */, void* /* sen
 
     return 1;
 }
+
+#elif defined(SFML_SYSTEM_EMSCRIPTEN)
+void SensorImpl::initialize() {}
+void SensorImpl::cleanup() {}
+void SensorImpl::close() {}
+Vector3f SensorImpl::update() { return Vector3f(); }
+void SensorImpl::setEnabled(bool enabled) {}
+#endif
 
 } // namespace priv
 

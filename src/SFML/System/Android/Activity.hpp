@@ -25,6 +25,8 @@
 #ifndef SFML_ACTIVITY_HPP
 #define SFML_ACTIVITY_HPP
 
+#ifdef SFML_SYSTEM_ANDROID
+
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
@@ -98,5 +100,6 @@ SFML_SYSTEM_API ActivityStates& getActivity();
 } // namespace priv
 } // namespace sf
 
+#endif // SFML_SYSTEM_ANDROID
 
 #endif // SFML_ACTIVITY_HPP

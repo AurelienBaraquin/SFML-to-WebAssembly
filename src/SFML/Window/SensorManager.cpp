@@ -25,6 +25,8 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
+#ifdef SFML_SYSTEM_ANDROID
+
 #include <SFML/Window/SensorManager.hpp>
 #include <SFML/System/Err.hpp>
 
@@ -127,3 +129,5 @@ SensorManager::~SensorManager()
 } // namespace priv
 
 } // namespace sf
+
+#endif

@@ -25,6 +25,8 @@
 #ifndef SFML_RESOURCESTREAM_HPP
 #define SFML_RESOURCESTREAM_HPP
 
+#ifdef SFML_SYSTEM_ANDROID
+
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
@@ -109,5 +111,6 @@ private:
 
 } // namespace sf
 
+#endif // SFML_SYSTEM_ANDROID
 
 #endif // SFML_RESOURCESTREAM_HPP

@@ -101,7 +101,7 @@
         #include <GLES2/gl2.h>
         #include <GLES2/gl2ext.h>
 
-        #define SFML_SYSTEM_EMC
+        #define SFML_SYSTEM_EMSCRIPTEN
 
     #else
 

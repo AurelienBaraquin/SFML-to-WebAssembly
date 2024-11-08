@@ -47,7 +47,7 @@
 
     #include <SFML/Window/iOS/SensorImpl.hpp>
 
-#elif defined(SFML_SYSTEM_ANDROID)
+#elif defined(SFML_SYSTEM_ANDROID) || defined(SFML_SYSTEM_EMSCRIPTEN)
 
     #include <SFML/Window/Android/SensorImpl.hpp>
 

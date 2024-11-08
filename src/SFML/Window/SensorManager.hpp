@@ -32,7 +32,7 @@
 #include <SFML/Window/SensorImpl.hpp>
 #include <SFML/System/NonCopyable.hpp>
 
-
+#ifdef SFML_SYSTEM_ANDROID
 namespace sf
 {
 namespace priv
@@ -133,6 +133,8 @@ private:
 } // namespace priv
 
 } // namespace sf
+
+#endif
 
 
 #endif // SFML_SENSORMANAGER_HPP

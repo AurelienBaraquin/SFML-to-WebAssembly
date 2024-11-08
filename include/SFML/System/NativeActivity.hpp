@@ -32,7 +32,7 @@
 #include <SFML/System/Export.hpp>
 
 
-#if !defined(SFML_SYSTEM_ANDROID)
+#if !defined(SFML_SYSTEM_ANDROID) || defined(SFML_SYSTEM_EMSCRIPTEN)
 #error NativeActivity.hpp: This header is Android only.
 #endif
 
