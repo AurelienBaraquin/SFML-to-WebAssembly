@@ -32,6 +32,8 @@
 #include <SFML/Window/GlResource.hpp>
 #include <SFML/Window/WindowBase.hpp>
 
+#ifndef SFML_SYSTEM_EMSCRIPTEN
+
 
 namespace sf
 {
@@ -283,6 +285,7 @@ private:
 
 } // namespace sf
 
+#endif // SFML_SYSTEM_EMSCRIPTEN
 
 #endif // SFML_WINDOW_HPP
 

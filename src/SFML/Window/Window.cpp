@@ -31,6 +31,7 @@
 #include <SFML/System/Sleep.hpp>
 #include <SFML/System/Err.hpp>
 
+#ifndef SFML_SYSTEM_EMSCRIPTEN
 
 namespace sf
 {
@@ -244,3 +245,5 @@ void Window::initialize()
 }
 
 } // namespace sf
+
+#endif // SFML_SYSTEM_EMSCRIPTEN

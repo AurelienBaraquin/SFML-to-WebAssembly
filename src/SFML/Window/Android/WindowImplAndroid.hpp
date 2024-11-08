@@ -32,6 +32,9 @@
 #include <SFML/Window/WindowImpl.hpp>
 #include <SFML/Window/EglContext.hpp>
 #include <SFML/System/Android/Activity.hpp>
+
+#ifdef SFML_SYSTEM_ANDROID
+
 #include <android/input.h>
 
 
@@ -245,5 +248,6 @@ private:
 
 } // namespace sf
 
+#endif // SFML_SYSTEM_ANDROID
 
 #endif // SFML_WINDOWIMPLANDROID_HPP

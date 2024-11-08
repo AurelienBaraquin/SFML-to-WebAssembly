@@ -30,6 +30,7 @@
 #include <SFML/Window/WindowImpl.hpp>
 #include <SFML/System/Err.hpp>
 
+#ifndef SFML_SYSTEM_EMSCRIPTEN
 
 namespace
 {
@@ -381,3 +382,5 @@ void WindowBase::setFullscreenWindow(const WindowBase* window)
 }
 
 } // namespace sf
+
+#endif // SFML_SYSTEM_EMSCRIPTEN

@@ -25,6 +25,8 @@
 #ifndef SFML_WINDOWIMPL_HPP
 #define SFML_WINDOWIMPL_HPP
 
+#ifndef SFML_SYSTEM_EMSCRIPTEN
+
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
@@ -293,5 +295,6 @@ private:
 
 } // namespace sf
 
+#endif // SFML_SYSTEM_EMSCRIPTEN
 
 #endif // SFML_WINDOWIMPL_HPP

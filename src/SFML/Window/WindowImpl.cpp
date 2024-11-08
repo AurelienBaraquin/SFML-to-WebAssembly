@@ -74,15 +74,23 @@
 
     #define SFML_VULKAN_IMPLEMENTATION_NOT_AVAILABLE
 
-#elif defined(SFML_SYSTEM_ANDROID) || defined(SFML_SYSTEM_EMSCRIPTEN)
+#elif defined(SFML_SYSTEM_ANDROID)
 
     #include <SFML/Window/Android/WindowImplAndroid.hpp>
     typedef sf::priv::WindowImplAndroid WindowImplType;
 
     #define SFML_VULKAN_IMPLEMENTATION_NOT_AVAILABLE
 
+#elif defined(SFML_SYSTEM_EMSCRIPTEN)
+
+    #include <SFML/Window/Emscripten/WindowImplEmscripten.hpp>
+    typedef sf::priv::WindowImplEmscripten WindowImplType;
+
+    #define SFML_VULKAN_IMPLEMENTATION_NOT_AVAILABLE
+
 #endif
 
+#ifndef SFML_SYSTEM_EMSCRIPTEN
 
 namespace sf
 {
@@ -307,3 +315,5 @@ bool WindowImpl::createVulkanSurface(const VkInstance& instance, VkSurfaceKHR& s
 } // namespace priv
 
 } // namespace sf
+
+#endif
